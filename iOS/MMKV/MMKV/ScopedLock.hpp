@@ -22,7 +22,7 @@
 #define ScopedLock_h
 
 #import <Foundation/Foundation.h>
-
+//Mark:使用C栈上分配内存和出栈释放内存的特性做加锁和解锁，很好的思路！
 class CScopedLock {
     NSRecursiveLock *m_oLock;
 

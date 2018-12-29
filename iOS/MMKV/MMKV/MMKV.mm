@@ -65,7 +65,8 @@ static NSString *encodeMmapID(NSString *mmapID);
 	BOOL m_isInBackground;
 	BOOL m_needLoadFromFile;
 	BOOL m_hasFullWriteBack;
-
+    
+    //Mark:使用CRC做文件校验确保减少了脏数据出现的可能性
 	uint32_t m_crcDigest;
 	int m_crcFd;
 	char *m_crcPtr;
@@ -74,6 +75,7 @@ static NSString *encodeMmapID(NSString *mmapID);
 #pragma mark - init
 
 + (void)initialize {
+    //Mark:这里非常小心的考虑的集成引起的调用，细！
 	if (self == MMKV.class) {
 		g_instanceDic = [NSMutableDictionary dictionary];
 		g_instanceLock = [[NSRecursiveLock alloc] init];
@@ -1279,6 +1281,7 @@ NSData *decryptBuffer(AESCrypt &crypter, NSData *inputBuffer) {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *nsLibraryPath = (NSString *) [paths firstObject];
 	if ([nsLibraryPath length] > 0) {
+        //Mark：对用户传递的mmapID，如果出现特殊字符（文件里面不能存在的字符）进行了encode处理，细！
 		return [nsLibraryPath stringByAppendingFormat:@"/mmkv/%@", encodeMmapID(mmapID)];
 	} else {
 		return @"";

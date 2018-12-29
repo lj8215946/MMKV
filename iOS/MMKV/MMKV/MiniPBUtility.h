@@ -22,6 +22,7 @@
 
 template <typename T, typename P>
 union Converter {
+    //Mark:编译期断言检查+灵活运用union做类型转换，学习到了。
 	static_assert(sizeof(T) == sizeof(P), "size not match");
 	T first;
 	P second;

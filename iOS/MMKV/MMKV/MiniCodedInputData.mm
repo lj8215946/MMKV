@@ -96,6 +96,7 @@ uint32_t MiniCodedInputData::readUInt32() {
 
 int32_t MiniCodedInputData::readRawVarint32() {
 	int8_t tmp = this->readRawByte();
+    //tmp>=0代表最高位为0，表示读取结束
 	if (tmp >= 0) {
 		return tmp;
 	}

@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)clearAll;
 
 // MMKV's size won't reduce after deleting key-values
-// call this method after lots of deleting f you care about disk usage
+// call this method after lots of deleting if you care about disk usage
 // note that `clearAll` has the similar effect of `trim`
 - (void)trim;
 
